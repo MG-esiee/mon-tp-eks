@@ -1,0 +1,6 @@
+---
+- name: Configure the EC2 instance to run a sample app
+  hosts: all
+  become: yes
+  roles:
+    - sample-app
