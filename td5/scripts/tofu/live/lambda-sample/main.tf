@@ -3,7 +3,8 @@ provider "aws" {
 }
 
 module "function" {
-  source = source = "github.com/brikis98/devops-book//modules/lambda?ref=main"
+  # On pointe vers ton dossier local
+  source = "../../modules/lambda"
 
   name = var.name
 
@@ -20,7 +21,8 @@ module "function" {
 }
 
 module "gateway" {
-  source = "github.com/brikis98/devops-book//modules/api-gateway?ref=main"
+  # On pointe vers ton dossier local
+  source = "../../modules/api-gateway"
 
   name = var.name
   function_arn       = module.function.function_arn
