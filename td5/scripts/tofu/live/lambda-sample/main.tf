@@ -3,8 +3,8 @@ provider "aws" {
 }
 
 module "function" {
-  # Chemin GitHub officiel et stable
-  source = "github.com/brikis98/devops-book//ch3/tofu/modules/lambda?ref=v0.1.0"
+  # Utilisation du chemin exact vers le sous-dossier dans le repo de l'auteur
+  source = "github.com/brikis98/devops-book//ch3/tofu/modules/lambda?ref=main"
 
   name = var.name
 
@@ -21,8 +21,8 @@ module "function" {
 }
 
 module "gateway" {
-  # Chemin GitHub officiel et stable
-  source = "github.com/brikis98/devops-book//ch3/tofu/modules/api-gateway?ref=v0.1.0"
+  # Utilisation du chemin exact vers le sous-dossier dans le repo de l'auteur
+  source = "github.com/brikis98/devops-book//ch3/tofu/modules/api-gateway?ref=main"
 
   name = var.name
   function_arn       = module.function.function_arn
