@@ -19,8 +19,7 @@ jobs:
           role-to-assume: arn:aws:iam::609524517974:role/lambda-sample-tests    
           role-session-name: tests-${{ github.run_number }}-${{ github.actor }} 
           aws-region: us-east-2
-          # Force la communication avec la région spécifique pour éviter l'erreur "Provider not found"
-          aws-role-sts-endpoint: https://sts.us-east-2.amazonaws.com
+          audience: sts.amazonaws.com
 
       - uses: opentofu/setup-opentofu@v1                                        
 
