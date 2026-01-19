@@ -10,7 +10,6 @@ jobs:
       id-token: write
       contents: read
     steps:
-      # Utilisation de la v4 plus stable pour les permissions OIDC
       - uses: actions/checkout@v4
 
       - name: Configure AWS credentials
@@ -19,7 +18,6 @@ jobs:
           role-to-assume: arn:aws:iam::609524517974:role/lambda-sample-tests    
           role-session-name: tests-${{ github.run_number }}-${{ github.actor }} 
           aws-region: us-east-2
-          audience: sts.amazonaws.com
 
       - uses: opentofu/setup-opentofu@v1                                        
 
