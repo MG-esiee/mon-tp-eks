@@ -3,6 +3,7 @@ provider "aws" {
 }
 
 module "function" {
+  # Utilisation du module Lambda du livre
   source = "github.com/brikis98/devops-book//ch3/tofu/modules/lambda"
 
   name = var.name
@@ -20,9 +21,25 @@ module "function" {
 }
 
 module "gateway" {
+  # Utilisation du module API Gateway du livre
   source = "github.com/brikis98/devops-book//ch3/tofu/modules/api-gateway"
 
-  name = var.name
+  name               = var.name
   function_arn       = module.function.function_arn
   api_gateway_routes = ["GET /"]
 }
+
+# --- AJOUT DES OUTPUTS POUR LES TESTS ---
+
+output "function_url" {
+  value       = module.function.function_url
+  description = "L'URL de la fonction Lambda (si activée)"
+}
+
+output "api_url" {
+  value       = module.gateway.api_url
+  description = "L'URL de l'API Gateway"
+}
+
+# Ce bloc est indispensable pour que le fichier .tftest.hcl 
+# puisse récupérer l'URL à tester via data.http.test_endpoint
