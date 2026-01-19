@@ -1,6 +1,10 @@
+provider "aws" {
+  region = "us-east-2"
+}
+
 module "function" {
-  # Ce chemin a fonctionné dans ton log précédent
-  source = "github.com/brikis98/devops-book//ch3/tofu/modules/lambda?ref=main"
+  # Chemin local vers ton propre dossier modules
+  source = "../../modules/lambda"
 
   name = var.name
   src_dir = "${path.module}/src"
@@ -15,8 +19,8 @@ module "function" {
 }
 
 module "gateway" {
-  # On essaie le chemin alternatif qui semble être le bon pour l'API Gateway
-  source = "github.com/brikis98/devops-book//modules/api-gateway?ref=main"
+  # Chemin local vers ton propre dossier modules
+  source = "../../modules/api-gateway"
 
   name = var.name
   function_arn       = module.function.function_arn
