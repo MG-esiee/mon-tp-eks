@@ -1,17 +1,11 @@
-provider "aws" {
-  region = "us-east-2"
-}
-
 module "function" {
-  # Utilisation du chemin exact vers le sous-dossier dans le repo de l'auteur
+  # Ce chemin a fonctionné dans ton log précédent
   source = "github.com/brikis98/devops-book//ch3/tofu/modules/lambda?ref=main"
 
   name = var.name
-
   src_dir = "${path.module}/src"
   runtime = "nodejs20.x"
   handler = "index.handler"
-
   memory_size = 128
   timeout     = 5
 
@@ -21,8 +15,8 @@ module "function" {
 }
 
 module "gateway" {
-  # Utilisation du chemin exact vers le sous-dossier dans le repo de l'auteur
-  source = "github.com/brikis98/devops-book//ch3/tofu/modules/api-gateway?ref=main"
+  # On essaie le chemin alternatif qui semble être le bon pour l'API Gateway
+  source = "github.com/brikis98/devops-book//modules/api-gateway?ref=main"
 
   name = var.name
   function_arn       = module.function.function_arn
