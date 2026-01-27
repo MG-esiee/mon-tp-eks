@@ -3,8 +3,18 @@ provider "aws" {
 }
 
 module "state" {
-  source = "github.com/brikis98/devops-book//ch5/tofu/modules/state-bucket"
+  # Chemin local vers le module que tu as normalement copié tout à l'heure
+  source = "../../modules/state-bucket"
 
-  # TODO: fill in your own bucket name!
-  name = "fundamentals-of-devops-tofu-state"
+  # Choisis un nom UNIQUE (AWS rejette les doublons sur S3)
+  # Exemple: devops-lab2-votre-nom-tofu-state
+  name   = "mateogallina-devops-tofu-state-unique" 
+}
+
+output "s3_bucket_name" {
+  value = module.state.s3_bucket_name
+}
+
+output "dynamodb_table_name" {
+  value = module.state.dynamodb_table_name
 }
