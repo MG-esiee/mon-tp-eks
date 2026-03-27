@@ -1,11 +1,10 @@
 terraform {
   backend "s3" {
-    # TODO: fill in your own bucket name here!
-    bucket         = "fundamentals-of-devops-tofu-state" 
-    key            = "ch5/tofu/live/lambda-sample"       
+    bucket         = "mateogallina-devops-tofu-state-unique"
+    # ATTENTION : La key doit être différente ici pour ne pas écraser l'autre
+    key            = "td5/scripts/tofu/live/lambda-sample/terraform.tfstate"
     region         = "us-east-2"
     encrypt        = true
-    # TODO: fill in your own DynamoDB table name here!
-    dynamodb_table = "fundamentals-of-devops-tofu-state" 
+    dynamodb_table = "mateogallina-devops-tofu-state-unique"
   }
 }
